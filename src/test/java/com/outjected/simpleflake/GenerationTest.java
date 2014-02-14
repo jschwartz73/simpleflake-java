@@ -10,7 +10,7 @@ public class GenerationTest {
 
   @Test
   public void test() {
-    FlakeGenerator gen = new FlakeGenerator();
+    SimpleFlake gen = new SimpleFlake();
     Assert.assertTrue(gen.generateBytes().length == 8);
     Assert.assertNotEquals(gen.generate(), gen.generate());
   }
@@ -18,7 +18,7 @@ public class GenerationTest {
   @Test
   public void generateAMillion() {
     final int ITERATIONS = 1_000_000;
-    FlakeGenerator gen = new FlakeGenerator();
+    SimpleFlake gen = new SimpleFlake();
     HashSet<Long> results = new HashSet<>(ITERATIONS, 100);
     for (int i = 0; i < ITERATIONS; i++) {
       results.add(gen.generate());

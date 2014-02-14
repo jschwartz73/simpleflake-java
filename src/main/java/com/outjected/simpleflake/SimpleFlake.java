@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class FlakeGenerator {
+public class SimpleFlake {
 
   private static final long EPOCH = 1288834974657L;
   private static final long MAX_SIGNED_LONG = 2199023255551L;
