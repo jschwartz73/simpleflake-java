@@ -4,12 +4,28 @@ package com.outjected.simpleflake;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.TreeSet;
+
 public class GenerationTest {
 
   @Test
   public void test() {
-    SimpleFlake sf = FlakeGenerator.generate();
+    FlakeGenerator gen = new FlakeGenerator();
+    SimpleFlake sf = gen.generateSimpleFlake();
     Assert.assertTrue(sf.toByteArray().length == 8);
-    Assert.assertNotEquals(FlakeGenerator.generate().toLong(), FlakeGenerator.generate().toLong());
+    Assert.assertNotEquals(gen.generateLong(), gen.generateLong());
+  }
+
+  @Test
+  public void generateMillions(){
+      long start = System.currentTimeMillis();
+      FlakeGenerator gen = new FlakeGenerator();
+      TreeSet<Long> results = new TreeSet<>();
+      for(int i =0; i < 250_000; i++) {
+          results.add(gen.generateLong());
+      }
+      Assert.assertEquals(250_000L, results.size());
+      long end = System.currentTimeMillis();
+      System.out.println("Completed in " + (end - start) + " ms");
   }
 }
