@@ -12,7 +12,7 @@ public class FlakeGenerator {
 
   private long lastTimeStamp = 0;
   private Set<Long> currentRandoms = new HashSet<>(5000);
-  private SecureRandom secureRandom;
+  private SecureRandom secureRandom = new SecureRandom();
 
   public long generateLong() {
 
@@ -35,16 +35,16 @@ public class FlakeGenerator {
     long random = nextRandom();
 
     if(lastTimeStamp != currentTimeStamp) {
+        // Timestamp has advanced so reset it and clear the previous cache
         lastTimeStamp = currentTimeStamp;
         currentRandoms.clear();
-        currentRandoms.add(random);
     } else {
+        // Same timestamp as previous keep generating randoms till new is found
         while(currentRandoms.contains(random)) {
             random = nextRandom();
         }
-        currentRandoms.add(random);
     }
-
+    currentRandoms.add(random);
     return shiftedTimeStamp | random;
   }
 
@@ -53,9 +53,6 @@ public class FlakeGenerator {
     }
 
     private long nextRandom(){
-        if(secureRandom == null) {
-            secureRandom = new SecureRandom();
-        }
         return secureRandom.nextLong() >>> 42;
     }
 }
