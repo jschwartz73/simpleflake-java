@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.outjected</groupId>
 	<artifactId>simpleflake-java</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1-SNAPSHOT</version>
 
 	<properties>
 		<version.compiler.plugin>3.1</version.compiler.plugin>
